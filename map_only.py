@@ -11,27 +11,16 @@ centroids = results["centroids"]
 paths = results["paths"]
 
 st.title("Traffic-Based Route Guidance System")
-
-# Sidebar inputs
-source = st.selectbox("Source Node", options=centroids.keys())
-target = st.selectbox("Target Node", options=centroids.keys())
-day = st.number_input("Day (1-31)", min_value=1, max_value=31, value=25)
-time = st.time_input("Time", value=datetime.time(8, 30))
-model = st.selectbox("Model", options=["LSTM", "GRU", "MLP", "TCN"])
-routes = st.number_input("Number of Routes", min_value=1, max_value=5, value=3)
-timestamp = f"2006-10-{day:02d} {time.strftime('%H:%M:%S')}"
-
-# if st.button("Find Routes"):
-#     # Compose timestamp
-#     timestamp = f"2006-10-{day:02d} {time.strftime('%H:%M:%S')}"
+source = results["source"]
+target = results["target"]
+timestamp = results["timestamp"]
+model = results["model"]
+routes = results["routes"]
 
 
 
 if paths:
     # Center map on source
-
-
-
     m = folium.Map(location=centroids[source], zoom_start=13)
     colors = ["red", "blue", "green", "purple", "orange"]
     for node_id, (lat, lon) in centroids.items():
@@ -65,3 +54,4 @@ if paths:
         st.write(f"⏱️ Total travel time: {path_info[1]:.1f} minutes")
 else:
     st.error("No route found.")
+

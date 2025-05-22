@@ -8,6 +8,9 @@ from utils.edge_mapper         import EdgeMapper
 from models.predictor import LSTMPredictor, GRUPredictor, MLPPredictor, TCNPredictor
 from utils.flow_to_speed       import flow_to_speed
 
+import sys
+import json
+
 
 def main():
     p = argparse.ArgumentParser(
@@ -49,12 +52,13 @@ def main():
     # 4) Run A* to get the fastest route under predicted traffic
     print(f"🚦 Running A* from {args.source} → {args.target} at {args.timestamp} …")
     #path, total_time = astar(args.source, args.target,centroids, edges, predictor, args.timestamp)
-    paths = astar(args.source, args.target,centroids, edges, predictor, args.timestamp, k=3)
+    paths = astar(args.source, args.target,centroids, edges, predictor, args.timestamp, k=int(args.routes))
     print(f"{paths}")
 
     if not paths:
         print("❌ No route found.")
         return
+
 
     # # 5) Compute total distance
     # total_dist = 0.0
