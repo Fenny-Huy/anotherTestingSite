@@ -15,10 +15,12 @@ def main():
     p.add_argument('--map', default=False)
     args = p.parse_args()
 
+
     paths = run_model(args.source, args.target, args.timestamp, args.model, int(args.routes))
 
-    if bool(args.map):
+    if args.map.lower() == 'true':
         subprocess.run(["streamlit", "run", "map_only.py"])
+    
         
 if __name__ == "__main__":
     main()
