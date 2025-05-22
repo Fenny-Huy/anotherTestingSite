@@ -18,6 +18,14 @@ def main():
 
     paths = run_model(args.source, args.target, args.timestamp, args.model, int(args.routes))
 
+    i = 0
+    for path in paths:
+        i+= 1
+        print(f"\nOptimal route {i}:")
+        print("   " + " → ".join(path[0]))
+        print(f"\n Total distance: {path[2]:.2f} km")
+        print(f"Total travel time: {path[1]:.1f} minutes")
+
     if args.map.lower() == 'true':
         subprocess.run(["streamlit", "run", "map_only.py"])
     
