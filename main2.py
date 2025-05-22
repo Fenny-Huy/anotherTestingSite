@@ -17,7 +17,7 @@ def main():
 
     paths = run_model(args.source, args.target, args.timestamp, args.model, int(args.routes))
 
-    if args.map:
+    if bool(args.map):
         subprocess.run(["streamlit", "run", "map_only.py"])
         
 if __name__ == "__main__":
